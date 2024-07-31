@@ -2,16 +2,15 @@ import { Steps } from "antd";
 
 Step.propTypes = {
   current: () => {},
-  handleOnchange: () => {},
 };
 
-function Step({ current, handleOnchange }) {
+function Step({ current }) {
   return (
     <>
       <Steps
         size="small"
+        responsive={false}
         current={current}
-        onChange={handleOnchange}
         className="mb-2"
         items={[
           {
@@ -28,7 +27,7 @@ function Step({ current, handleOnchange }) {
           },
         ]}
       />
-      <hr/>
+      <hr />
     </>
   );
 }

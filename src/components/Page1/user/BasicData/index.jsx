@@ -1,14 +1,16 @@
 import AgeInput from "./AgeInput";
 import GengerInput from "./GengerInput";
+import UnderlyingInput from "./UnderlyingInput";
+import AllergyInput from "./AllergyInput";
 
 function Index() {
   return (
     <div className="flex w-full  justify-end">
-      <div className="rounded-md bg-slate-200 w-[250px] p-3">
+      <div className="rounded-md bg-slate-200 w-[250px] p-3 mb-4">
         <AgeInput />
         <GengerInput />
-        <p className="font-semibold">โรคประจำตัว</p>
-        <p className="font-semibold">การแพ้ยา/แพ้อาหาร</p>
+        <UnderlyingInput />
+        <AllergyInput />
       </div>
     </div>
   );

@@ -1,36 +1,18 @@
-import { useState } from "react";
-function GengerInput() {
-  const nonActiveStyle =
-    "rounded-xl w-[90px] min-w-[90px] bg-slate-400 px-2 m-2 cursor-pointer";
-  const activeStle =
-    "rounded-xl w-[90px] min-w-[90px]  bg-green-400 px-2 m-2 cursor-pointer";
-  const [selected, setSelected] = useState(null);
+import RadioButton from "../../../RadioButton";
+import { useSelector, useDispatch } from "react-redux";
+import { genderEdited } from "../../../../slide/medicalTaking-slice";
+function GenderInput() {
+  const data = useSelector((state) => state.medicalTaking.recorded.gender);
+  const dispatch = useDispatch();
 
   const handleOnclick = (e) => {
-    setSelected(e.target.id);
+    dispatch(genderEdited({ newValue: e.target.id }));
   };
-
   return (
     <>
-      <p className="font-semibold">เพศ</p>
-      <div className="flex justify-end  text-center  flex-wrap ">
-        <div
-          id="0"
-          className={selected == 0 ? activeStle : nonActiveStyle}
-          onClick={handleOnclick}
-        >
-          ชาย
-        </div>
-        <div
-          id="1"
-          className={selected == 1 ? activeStle : nonActiveStyle}
-          onClick={handleOnclick}
-        >
-          หญิง
-        </div>
-      </div>
+      <RadioButton title="เพศ" data={data} handleOnclick={handleOnclick} />
     </>
   );
 }
 
-export default GengerInput;
+export default GenderInput;
