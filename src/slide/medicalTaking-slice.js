@@ -46,7 +46,7 @@ const initialState = {
               { id: 2, name: "subacute", t_name: " 8 - 14 วัน" },
               { id: 3, name: "chronic", t_name: "> 14 วัน" },
             ],
-            value: "1",
+            value: "0",
           },
         ],
         value: "0",
@@ -283,6 +283,21 @@ const medicalTakingSlice = createSlice({
       );
       state.recorded.chief_complaint[index].freeText = newFreeText;
     },
+    CCCancel(state, action) {
+      const { ccId } = action.payload;
+      const arrayCC = state.recorded.chief_complaint;
+      const index = arrayCC.findIndex((obj) => obj.id == ccId);
+      const currentValue = arrayCC[index].value;
+      if (currentValue == "0") {
+        const arrayCCDetail = arrayCC[index].detail;
+        for (let i = 0; i < arrayCCDetail.length; i++) {
+          arrayCCDetail[i].value = 0;
+        }
+      }
+      if ((ccId == "0") & (currentValue == "0")) {
+        arrayCC[index].freeText = "";
+      }
+    },
   },
   extraReducers: (builder) =>
     builder.addCase(login.fulfilled, (state, action) => {
@@ -301,5 +316,6 @@ export const {
   CCEdited,
   CCOther,
   CCOtherFreeText,
+  CCCancel,
 } = medicalTakingSlice.actions;
 export default medicalTakingSlice.reducer;

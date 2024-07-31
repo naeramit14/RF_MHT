@@ -9,6 +9,8 @@ function Index({ handleNext, handlePrevious }) {
     (state) => state.medicalTaking.recorded.chief_complaint
   );
 
+  const activeCCIndex = data.findIndex((cc) => cc.value == "1");
+
   return (
     <div className="w-full h-full overflow-y-auto p-2 pb-20  flex flex-col justify-between">
       <div>
@@ -23,9 +25,11 @@ function Index({ handleNext, handlePrevious }) {
         <Button danger type="primary" onClick={handlePrevious}>
           PREVIOUS
         </Button>
-        <Button type="primary" onClick={handleNext}>
-          NEXT
-        </Button>
+        {activeCCIndex != "-1" ? (
+          <Button type="primary" onClick={handleNext}>
+            NEXT
+          </Button>
+        ) : null}
       </div>
     </div>
   );

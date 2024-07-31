@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import { Modal, Input } from "antd";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import OptionInput from "./OptionInput";
 import {
   CCEdited,
   CCOther,
   CCOtherFreeText,
+  CCCancel,
 } from "../../slide/medicalTaking-slice";
 
 function CCModal({ isModalOpen, setIsModalOpen, ccId }) {
@@ -27,6 +27,7 @@ function CCModal({ isModalOpen, setIsModalOpen, ccId }) {
     }
   };
   const handleCancel = () => {
+    dispatch(CCCancel({ ccId }));
     setIsModalOpen(false);
   };
   const handleOnChange = (e) => {
