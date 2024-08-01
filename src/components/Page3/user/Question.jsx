@@ -14,6 +14,7 @@ function Question({ piObj, idx }) {
   const recorded = useSelector((state) => state.medicalTaking.recorded);
   const dispatch = useDispatch();
 
+
   return (
     <div key={idx} id={idx} className="w-full flex flex-col ">
       <div className="flex justify-start rounded-md  bg-slate-200  w-fit p-2">
@@ -23,8 +24,8 @@ function Question({ piObj, idx }) {
       </div>
       <div className=" w-full flex justify-end text-center my-2">
         <div
-          id="2"
-          className={piObj.value == "2" ? activeStle : nonActiveStyle}
+          id={2}
+          className={piObj.value == 2 ? activeStle : nonActiveStyle}
           onClick={() => {
             setIsModalOpen(true);
           }}
@@ -32,13 +33,13 @@ function Question({ piObj, idx }) {
           มี
         </div>
         <div
-          id="1"
-          className={piObj.value == "1" ? activeStle : nonActiveStyle}
+          id={1}
+          className={piObj.value == 1 ? activeStle : nonActiveStyle}
           onMouseDown={async () => {
             const selectedPI = recorded.patient_illness.find(
               (obj) => obj.id == piObj.id
             );
-            if (selectedPI.value != "1") {
+            if (selectedPI.value != 1) {
               setIsupdate(true);
             } else {
               setIsupdate(false);

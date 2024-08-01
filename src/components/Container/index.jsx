@@ -34,7 +34,7 @@ function Index() {
           ) : currentStep == 2 ? (
             <Page3 handleNext={handleNext} />
           ) : currentStep == 3 ? (
-            <Page4 handlePrevious={handlePrevious} />
+            <Page4 />
           ) : null}
         </div>
       ) : null}

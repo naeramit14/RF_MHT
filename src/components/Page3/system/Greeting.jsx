@@ -4,8 +4,8 @@ function Greeting() {
     (state) => state.medicalTaking.recorded.chief_complaint
   );
 
-  const cc = data.find((obj) => obj.value == "1");
-  const ccText = cc.id == "0" ? cc.freeText : cc.t_name;
+  const cc = data.find((obj) => obj.value == 1);
+  const ccText = cc.id == 0 ? cc.freeText : cc.t_name;
   return (
     <div className="flex w-full pb-6 flex-wrap gap-3">
       <div className="rounded-md bg-slate-200 w-[260px] p-3">

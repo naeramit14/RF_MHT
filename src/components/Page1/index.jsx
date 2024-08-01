@@ -12,7 +12,7 @@ function Index({ handleNext }) {
         <Greeting />
         <BasicData />
       </div>
-      {(recorded.age.value != "0") & (recorded.gender.value != "0") ? (
+      {(recorded.age.value != 0) & (recorded.gender.value != 0) ? (
         <div className="flex  flex-row-reverse">
           <Button type="primary" onClick={handleNext}>
             NEXT

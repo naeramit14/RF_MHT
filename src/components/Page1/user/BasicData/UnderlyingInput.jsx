@@ -9,7 +9,7 @@ function UnderlydingInput() {
   const dispatch = useDispatch();
 
   const handleOnclick = (e) => {
-    dispatch(underlyingAdded({ newObj: { id: e.target.id } }));
+    dispatch(underlyingAdded({ newObj: { id: +e.target.id } }));
   };
 
   const handleOnchange = (e) => {
