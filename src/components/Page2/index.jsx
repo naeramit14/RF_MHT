@@ -22,14 +22,14 @@ function Index({ handleNext, handlePrevious }) {
         </div>
       </div>
       <div className="flex  justify-between">
-        <Button danger type="primary" onClick={handlePrevious}>
-          PREVIOUS
-        </Button>
+        <Button onClick={handlePrevious}>PREVIOUS</Button>
         {activeCCIndex != "-1" ? (
           <Button type="primary" onClick={handleNext}>
             NEXT
           </Button>
-        ) : null}
+        ) : (
+          <Button disabled>NEXT</Button>
+        )}
       </div>
     </div>
   );

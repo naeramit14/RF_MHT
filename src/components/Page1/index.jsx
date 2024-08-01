@@ -18,7 +18,11 @@ function Index({ handleNext }) {
             NEXT
           </Button>
         </div>
-      ) : null}
+      ) : (
+        <div className="flex  flex-row-reverse">
+          <Button disabled>NEXT</Button>
+        </div>
+      )}
     </div>
   );
 }

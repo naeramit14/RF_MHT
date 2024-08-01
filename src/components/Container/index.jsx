@@ -32,7 +32,7 @@ function Index() {
           ) : currentStep == 1 ? (
             <Page2 handleNext={handleNext} handlePrevious={handlePrevious} />
           ) : currentStep == 2 ? (
-            <Page3 handleNext={handleNext} handlePrevious={handlePrevious} />
+            <Page3 handleNext={handleNext} />
           ) : currentStep == 3 ? (
             <Page4 handlePrevious={handlePrevious} />
           ) : null}
