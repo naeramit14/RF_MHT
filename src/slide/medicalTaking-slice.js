@@ -1,90 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as medicalTakingService from "../api/medicalTaking-api";
 
-const question = [
-  {
-    id: 11,
-    name: "nausea",
-    t_name: "คลื่นไส้",
-    detail: [
-      {
-        name: "duration",
-        question: "ผู้ป่วยมีอาการคลื่นไส้มากี่วัน ?",
-        options: [
-          { id: 1, name: "acute", t_name: "<= 7 วัน" },
-          { id: 2, name: "subacute", t_name: " 8 - 14 วัน" },
-          { id: 3, name: "chronic", t_name: "> 14 วัน" },
-        ],
-        value: 0,
-      },
-    ],
-    value: 0,
-  },
-  {
-    id: 8,
-    name: "diarrhea",
-    t_name: "ท้องเสีย",
-    detail: [
-      {
-        name: "duration",
-        question: "ผู้ป่วยมีอาการท้องเสียมากี่วัน ?",
-        options: [
-          { id: 1, name: "acute", t_name: "<= 7 วัน" },
-          { id: 2, name: "chronic", t_name: "> 7 วัน" },
-        ],
-        value: 0,
-      },
-      {
-        name: "frequency",
-        question: "จำนวนการถ่ายใน 1 วัน เป็นเท่าไร ?",
-        options: [
-          { id: 1, name: "mild", t_name: "< 5 ครั้ง" },
-          { id: 2, name: "mod", t_name: "5 - 10 ครั้ง" },
-          { id: 3, name: "severe", t_name: "> 10  ครั้ง" },
-        ],
-        value: 0,
-      },
-      {
-        name: "with_mucus",
-        question: "มีถ่ายปนมูกหรือไม่ไร ?",
-        options: [
-          { id: 1, name: "absent", t_name: "ไม่มี" },
-          { id: 2, name: "present", t_name: "มี" },
-        ],
-        value: 0,
-      },
-      {
-        name: "with_blood",
-        question: "มีถ่ายปนเลือดหรือไม่ ?",
-        options: [
-          { id: 1, name: "absent", t_name: "ไม่มี" },
-          { id: 2, name: "present", t_name: "มี" },
-        ],
-        value: 0,
-      },
-    ],
-    value: 0,
-  },
-
-  {
-    id: 5,
-    name: "dyspnea",
-    t_name: "หายใจเหนื่อย",
-    detail: [
-      {
-        name: "duration",
-        question: "ผู้ป่วยมีอาการหายใจเหนื่อยมากี่วัน ?",
-        options: [
-          { id: 1, name: "acute", t_name: "<= 7 วัน" },
-          { id: 2, name: "chronic", t_name: "> 7 วัน" },
-        ],
-        value: 0,
-      },
-    ],
-    value: 0,
-  },
-];
-
 const initialState = {
   recorded: {
     age: {
@@ -338,6 +254,7 @@ const initialState = {
     ],
     patient_illness: [],
   },
+  probable_disease: [],
 };
 
 export const getNewQuestion = createAsyncThunk(
@@ -383,6 +300,55 @@ export const getNewQuestion = createAsyncThunk(
       const res = await medicalTakingService.getNewQuestion(payload);
       const newQuestion = res.data;
       return newQuestion;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.response.data.message);
+    }
+  }
+);
+
+export const getProbableDisease = createAsyncThunk(
+  "medicalTaking/getProbableDisease",
+  async (input, thunkApi) => {
+    try {
+      const payload = {
+        ph_ud: [],
+        pd: [
+          { id: 1, value: 0 },
+          { id: 2, value: 0 },
+        ],
+        cc: [],
+        pi_p: [],
+        pi_n: [],
+      };
+      payload.ph_ud = input.underlying.value;
+      payload.pd[0].value = input.gender.value;
+      payload.pd[1].value = input.age.value;
+
+      const ccIdx = input.chief_complaint.findIndex((cc) => cc.value == 1);
+      const Selectedcc = input.chief_complaint[ccIdx];
+      const tempCC = { id: Selectedcc.id };
+      for (let i = 0; i < Selectedcc.detail.length; i++) {
+        tempCC[Selectedcc.detail[i].name] = Selectedcc.detail[i].value;
+      }
+      payload.cc = [tempCC];
+
+      const PI = input.patient_illness;
+      for (let i = 0; i < PI.length; i++) {
+        if (PI[i].value == 1) {
+          payload.pi_n.push({ id: PI[i].id });
+        }
+        if (PI[i].value == 2) {
+          const tempPI = { id: PI[i].id };
+          for (let j = 0; j < PI[i].detail.length; j++) {
+            tempPI[PI[i].detail[j].name] = PI[i].detail[j].value;
+          }
+          payload.pi_p.push(tempPI);
+        }
+      }
+
+      const res = await medicalTakingService.getProbableDisease(payload);
+      const probableDisease = res.data;
+      return probableDisease;
     } catch (err) {
       return thunkApi.rejectWithValue(err.response.data.message);
     }
@@ -514,14 +480,15 @@ const medicalTakingSlice = createSlice({
       }
     },
   },
-  extraReducers: (builder) =>
+  extraReducers: (builder) => {
     builder.addCase(getNewQuestion.fulfilled, (state, action) => {
       const index = state.recorded.patient_illness.findIndex(
         (obj) => obj.id == action.payload[0]?.id
       );
       if ((index == -1) & (action.payload.length > 0)) {
         state.recorded.patient_illness.push(action.payload[0]);
-      } else {
+      }
+      if (action.payload.length == 0) {
         const indexZero = state.recorded.patient_illness.findIndex(
           (obj) => obj.id == 0
         );
@@ -529,7 +496,11 @@ const medicalTakingSlice = createSlice({
           state.recorded.patient_illness.push({ id: 0 });
         }
       }
-    }),
+    });
+    builder.addCase(getProbableDisease.fulfilled, (state, action) => {
+      state.probable_disease = action.payload;
+    });
+  },
 });
 
 export const {
