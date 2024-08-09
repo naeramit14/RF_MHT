@@ -35,215 +35,6 @@ const initialState = {
     },
     chief_complaint: [
       {
-        id: 3,
-        name: "fever",
-        t_name: "ไข้",
-        detail: [
-          {
-            name: "duration",
-            question: "ผู้ป่วยมีอาการไข้มากี่วัน ?",
-            options: [
-              { id: 1, name: "acute", t_name: "<= 7 วัน" },
-              { id: 2, name: "subacute", t_name: " 8 - 14 วัน" },
-              { id: 3, name: "chronic", t_name: "> 14 วัน" },
-            ],
-            value: 0,
-          },
-        ],
-        value: 0,
-      },
-      {
-        id: "4",
-        name: "cough",
-        t_name: "ไอ",
-        detail: [
-          {
-            name: "duration",
-            question: "ผู้ป่วยมีอาการไอมากี่วัน ?",
-            options: [
-              { id: 1, name: "acute", t_name: "<= 14 วัน" },
-              { id: 2, name: "chronic", t_name: "> 14 วัน" },
-            ],
-            value: 0,
-          },
-        ],
-        value: 0,
-      },
-      {
-        id: 1,
-        name: "sore_throat",
-        t_name: "เจ็บคอ",
-        detail: [
-          {
-            name: "duration",
-            question: "ผู้ป่วยมีอาการเจ็บคอมากี่วัน ?",
-            options: [
-              {
-                id: 1,
-                name: "acute",
-                t_name: "<= 14 วัน",
-              },
-              {
-                id: 2,
-                name: "chronic",
-                t_name: "> 14 วัน",
-              },
-            ],
-            value: 0,
-          },
-          {
-            name: "severity",
-            question: "อาการเจ็บคอมากเท่าไร ?",
-            options: [
-              {
-                id: 1,
-                name: "mild",
-                t_name: "เล็กน้อย",
-              },
-              {
-                id: 2,
-                name: "mod",
-                t_name: "ปานกลาง",
-              },
-              {
-                id: 3,
-                name: "severe",
-                t_name: "รุนแรง",
-              },
-            ],
-            value: 0,
-          },
-          {
-            name: "progression",
-            question: "ตอนนี้อาการเจ็บคอเป็นอย่างไร ?",
-            options: [
-              {
-                id: 1,
-                name: "improving",
-                t_name: "อาการเจ็บทุเลา",
-              },
-              {
-                id: 2,
-                name: "transient",
-                t_name: "อาการเจ็บเป็นๆ หายๆ ",
-              },
-              {
-                id: 3,
-                name: "non-progress",
-                t_name: "อาการเจ็บเท่าเดิม",
-              },
-              {
-                id: 4,
-                name: "progressive",
-                t_name: "อาการเจ็บมากขึ้น",
-              },
-            ],
-            value: 0,
-          },
-        ],
-        value: 0,
-      },
-      {
-        id: 5,
-        name: "dyspnea",
-        t_name: "หายใจเหนื่อย",
-        detail: [
-          {
-            name: "duration",
-            question: "ผู้ป่วยมีอาการหายใจเหนื่อยมากี่วัน ?",
-            options: [
-              { id: 1, name: "acute", t_name: "<= 7 วัน" },
-              { id: 2, name: "chronic", t_name: "> 7 วัน" },
-            ],
-            value: 0,
-          },
-        ],
-        value: 0,
-      },
-      {
-        id: 10,
-        name: "abdominal_pain",
-        t_name: "ปวดท้อง",
-        detail: [
-          {
-            name: "duration",
-            question: "ผู้ป่วยมีอาการปวดท้องมากี่วัน ?",
-            options: [
-              { id: 1, name: "acute", t_name: "<= 7 วัน" },
-              { id: 2, name: "chronic", t_name: "> 7 วัน" },
-            ],
-            value: 0,
-          },
-          {
-            name: "severity",
-            question: "อาการปวดท้องรุนแรงเท่าไร ?",
-            options: [
-              { id: 1, name: "mild", t_name: "เล็กน้อย" },
-              { id: 2, name: "mod", t_name: "ปานกลาง" },
-              { id: 3, name: "severe", t_name: "มาก" },
-            ],
-            value: 0,
-          },
-          {
-            name: "progression",
-            question: "ตอนนี้อาการปวดเป็นอย่างไร ?",
-            options: [
-              { id: 1, name: "improving", t_name: "อาการปวดทุเลา" },
-              { id: 2, name: "transient", t_name: "อาการปวดเป็นๆ หายๆ " },
-              { id: 3, name: "non-progress", t_name: "อาการปวดเท่าเดิม" },
-              { id: 4, name: "progressive", t_name: "อาการปวดมากขึ้น" },
-            ],
-            value: 0,
-          },
-        ],
-        value: 0,
-      },
-      {
-        id: 8,
-        name: "diarrhea",
-        t_name: "ท้องเสีย",
-        detail: [
-          {
-            name: "duration",
-            question: "ผู้ป่วยมีอาการท้องเสียมากี่วัน ?",
-            options: [
-              { id: 1, name: "acute", t_name: "<= 7 วัน" },
-              { id: 2, name: "chronic", t_name: "> 7 วัน" },
-            ],
-            value: 0,
-          },
-          {
-            name: "frequency",
-            question: "จำนวนการถ่ายใน 1 วัน เป็นเท่าไร ?",
-            options: [
-              { id: 1, name: "mild", t_name: "< 5 ครั้ง" },
-              { id: 2, name: "mod", t_name: "5 - 10 ครั้ง" },
-              { id: 3, name: "severe", t_name: "> 10  ครั้ง" },
-            ],
-            value: 0,
-          },
-          {
-            name: "with_mucus",
-            question: "มีถ่ายปนมูกหรือไม่ ?",
-            options: [
-              { id: 1, name: "absent", t_name: "ไม่มี" },
-              { id: 2, name: "present", t_name: "มี" },
-            ],
-            value: 0,
-          },
-          {
-            name: "with_blood",
-            question: "มีถ่ายปนเลือดหรือไม่ ?",
-            options: [
-              { id: 1, name: "absent", t_name: "ไม่มี" },
-              { id: 2, name: "present", t_name: "มี" },
-            ],
-            value: 0,
-          },
-        ],
-        value: 0,
-      },
-      {
         id: 0,
         name: "other",
         t_name: "อื่น ๆ",
@@ -355,6 +146,19 @@ export const getProbableDisease = createAsyncThunk(
   }
 );
 
+export const getCheifComplaint = createAsyncThunk(
+  "medicalTaking/CheifComplaint",
+  async (input, thunkApi) => {
+    try {
+      const res = await medicalTakingService.getCheifComplaint();
+      const cheifComplaint = res.data;
+      return cheifComplaint;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.response.data.message);
+    }
+  }
+);
+
 const medicalTakingSlice = createSlice({
   name: "medicalTakingSlice",
   initialState,
@@ -387,11 +191,29 @@ const medicalTakingSlice = createSlice({
       state.recorded.allergy.freeText = newText;
     },
     CCDetailEdited(state, action) {
-      const { ccId, detailIdx, value } = action.payload;
+      const { ccId, detailIdx, value, mode } = action.payload;
       const ccIndex = state.recorded.chief_complaint.findIndex(
         (obj) => obj.id == ccId
       );
-      state.recorded.chief_complaint[ccIndex].detail[detailIdx].value = +value;
+      if (mode == "radioinput") {
+        state.recorded.chief_complaint[ccIndex].detail[detailIdx].value =
+          +value;
+      }
+      if (mode == "checkbox") {
+        const arr =
+          state.recorded.chief_complaint[ccIndex].detail[detailIdx].value;
+        const idx = +value - 1;
+        const current_value = arr[idx];
+        if (current_value == 0) {
+          state.recorded.chief_complaint[ccIndex].detail[
+            detailIdx
+          ].value.splice(idx, 1, 1);
+        } else {
+          state.recorded.chief_complaint[ccIndex].detail[
+            detailIdx
+          ].value.splice(idx, 1, 0);
+        }
+      }
     },
     CCEdited(state, action) {
       const { ccId } = action.payload;
@@ -462,11 +284,29 @@ const medicalTakingSlice = createSlice({
       arrayPI[piIdx].value = 2;
     },
     PIDetailEdited(state, action) {
-      const { piId, detailIdx, value } = action.payload;
+      const { piId, detailIdx, value, mode } = action.payload;
       const piIndex = state.recorded.patient_illness.findIndex(
         (obj) => obj.id == piId
       );
-      state.recorded.patient_illness[piIndex].detail[detailIdx].value = +value;
+      if (mode == "radioinput") {
+        state.recorded.patient_illness[piIndex].detail[detailIdx].value =
+          +value;
+      }
+      if (mode == "checkbox") {
+        const arr =
+          state.recorded.patient_illness[piIndex].detail[detailIdx].value;
+        const idx = +value - 1;
+        const current_value = arr[idx];
+        if (current_value == 0) {
+          state.recorded.patient_illness[piIndex].detail[
+            detailIdx
+          ].value.splice(idx, 1, 1);
+        } else {
+          state.recorded.patient_illness[piIndex].detail[
+            detailIdx
+          ].value.splice(idx, 1, 0);
+        }
+      }
     },
     PICancel(state, action) {
       const { piId } = action.payload;
@@ -499,6 +339,9 @@ const medicalTakingSlice = createSlice({
     });
     builder.addCase(getProbableDisease.fulfilled, (state, action) => {
       state.probable_disease = action.payload;
+    });
+    builder.addCase(getCheifComplaint.fulfilled, (state, action) => {
+      state.recorded.chief_complaint = action.payload;
     });
   },
 });

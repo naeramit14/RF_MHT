@@ -17,7 +17,7 @@ function Index({ handleNext, handlePrevious }) {
         <Greeting />
         <div className="flex w-full  justify-end">
           <div className="rounded-md bg-slate-200 w-[280px] p-3 mb-4">
-            <RadioButtonExtent data={data} />
+            {data ? <RadioButtonExtent data={data} /> : null}
           </div>
         </div>
       </div>

@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getCheifComplaint } from "../../slide/medicalTaking-slice";
 import Header from "./Header";
 import Step from "../Step";
 import Page1 from "../Page1";
@@ -9,6 +11,7 @@ import Page4 from "../Page4";
 function Index() {
   const [open, setOpen] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
+  const dispatch = useDispatch();
 
   const handleOpenChat = () => {
     setOpen(!open);
@@ -21,6 +24,11 @@ function Index() {
   const handlePrevious = () => {
     setCurrentStep(currentStep - 1);
   };
+
+  useEffect(() => {
+    dispatch(getCheifComplaint());
+  }, []);
+
   return (
     <main className="w-[390px] max-w-[390px] max-h-[800px] shadow-lg bg-white rounded-t-md overflow-hidden">
       <Header handleClick={handleOpenChat} />
